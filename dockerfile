@@ -23,5 +23,5 @@ ENV Project clusterServiceDemo
 
 WORKDIR /app
 COPY --from=builder /build/clusterServiceDemo /app/clusterServiceDemo
-
+EXPOSE 3000
 CMD ["/app/clusterServiceDemo"]
