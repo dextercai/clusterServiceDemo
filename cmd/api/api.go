@@ -3,11 +3,18 @@ package main
 import (
 	"bytes"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"os"
 )
 
 func main() {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		Prefork: true,
+	})
+
+	app.Use(requestid.New())
+	app.Use(logger.New())
 
 	app.Get("/*", func(c *fiber.Ctx) error {
 		var infoBuffer bytes.Buffer
